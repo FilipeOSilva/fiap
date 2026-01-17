@@ -1,0 +1,19 @@
+package com.fsilva.tc01.infra.docs;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SwaggerConfiguration {
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI().info(new Info()
+                .title("Desafio Restaurante")
+                .version("1.0.0")
+                .description("Documentação para o trabalho 01")
+        );
+    }
+}
