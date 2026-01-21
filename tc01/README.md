@@ -1,75 +1,25 @@
-# Links uteis
-https://start.spring.io/
-# Falar sobre JPA(postgres)
-# DB
----
+# TC01
 
-### Usuários
+## Montando ambiente
 
-* Dois tipos obrigatórios:
+### Variaveis de ambiente
+Para poder rodar esse projeto, deve-se criar um arquivo com nome de `.env`. Nele estaram todas as variaveis referente ao desenvolvimendo do projeto. As variaveis necessárias são:
+```
+DATABASE_PORT
+DATABASE_USER
+DATABASE_PASSW
+DATABASE_NAME
+PG_PORT
+PG_EMAIL
+PG_PASSW
+SPRING_KEY_JWT_SECRET
+```
+Como esse trabalho tem cunho educacional, irei colocar dentro do repositório, um arquivo já configurado para facilitar a utilização.
 
-  * Dono de restaurante
-  * Cliente
-* Possibilidade de adicionar novos tipos futuramente
+### Usando Dockerfile e Dockercompose
+Foram adicionados dois arquivos para podermos rodar a aplicação de forma "conterizada", que possibilita desacoplar do ambiente do usuário, garantindo que seja possível executar a aplicação. Para isso é necessário ter a ferramenta docker instalada na maquina. Para executar, esteja dentro na pasta do projeto e execute o comando:
+```
+docker-compose up -d
+```
 
----
-
-### Usuário (entidade principal)
-
-* `id` (chave primária)
-* `nome` (String)
-* `email` (String, **único**)
-* `login` (String)
-* `senha` (String)
-* `data_ultima_alteracao` (Date / DateTime)
-* `tipo_usuario` (ex: CLIENTE, DONO_RESTAURANTE)
-* `endereco` (relacionamento)
-
----
-
-### Endereço
-
-* Entidade separada
-* Campos:
-
-  * `rua`
-  * `numero`
-  * `cidade`
-  * `cep`
-  * `complemento` (opcional)
-* Relacionamento:
-
-  * Usuário 1 — 1 Endereço
-    *(ou 1 — N, se quiser enriquecer o modelo)*
-
----
-
-### Cliente
-
-* Especialização de Usuário
-* `id` (FK para Usuário)
-* Sem campos adicionais obrigatórios (por enquanto)
-
----
-
-### Dono de Restaurante
-
-* Especialização de Usuário
-* `id` (FK para Usuário)
-* Relacionamento:
-
-  * Dono de Restaurante 1 — N Restaurantes
-
----
-
-### Modelo Relacional (resumo)
-
-* `usuario`
-* `endereco`
-* `cliente`
-* `dono_restaurante`
-
----
-
-Se quiser, posso simplificar ainda mais ou adaptar exatamente ao **padrão que seu professor costuma cobrar**.
 
