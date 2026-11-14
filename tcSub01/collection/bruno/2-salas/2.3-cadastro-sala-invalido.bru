@@ -1,0 +1,32 @@
+meta {
+  name: 2.3 Cadastro de sala inválido - capacidade zero
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/rooms
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Sala Inválida {{runId}}",
+    "capacity": 0,
+    "location": "Sem local"
+  }
+}
+
+tests {
+  test("Status 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+  test("Aponta capacidade", function() {
+    expect(res.getBody().fieldErrors).to.have.property("capacity");
+  });
+}

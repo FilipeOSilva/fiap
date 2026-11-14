@@ -1,0 +1,27 @@
+meta {
+  name: 3.8 Notificações do usuário
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/api/notifications?userId={{userId}}
+  body: none
+  auth: none
+}
+
+script:post-response {
+  bru.setVar("notificationId", res.getBody()[0].id);
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Recebeu notificações de status", function() {
+    expect(res.getBody().length).to.be.at.least(3);
+  });
+  test("Recebeu notificação de rejeição", function() {
+    expect(res.getBody().some((n) => n.type === "RESERVA_REJEITADA")).to.equal(true);
+  });
+}

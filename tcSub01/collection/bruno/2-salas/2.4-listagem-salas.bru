@@ -1,0 +1,20 @@
+meta {
+  name: 2.4 Listagem de salas
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/rooms
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Retorna lista", function() {
+    expect(res.getBody()).to.be.an("array");
+  });
+}

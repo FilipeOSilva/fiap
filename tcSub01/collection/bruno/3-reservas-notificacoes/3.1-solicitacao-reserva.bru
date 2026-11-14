@@ -1,0 +1,37 @@
+meta {
+  name: 3.1 Solicitação de reserva (confirmação automática)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/reservations
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "userId": {{userId}},
+    "roomId": {{roomId}},
+    "startTime": "{{startTime}}",
+    "endTime": "{{endTime}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("reservationId", res.getBody().id);
+}
+
+tests {
+  test("Status 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+  test("Reserva confirmada", function() {
+    expect(res.getBody().status).to.equal("CONFIRMADA");
+  });
+}

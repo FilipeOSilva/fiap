@@ -1,0 +1,36 @@
+meta {
+  name: 3.5 Alteração de reserva (dono)
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/reservations/{{reservationId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  X-User-Id: {{userId}}
+}
+
+body:json {
+  {
+    "roomId": {{roomId}},
+    "startTime": "{{startTime2}}",
+    "endTime": "{{endTime2}}"
+  }
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Status segue CONFIRMADA", function() {
+    expect(res.getBody().status).to.equal("CONFIRMADA");
+  });
+  test("Início alterado", function() {
+    expect(res.getBody().startTime.substring(0, 16)).to.equal(bru.getVar("startTime2").substring(0, 16));
+  });
+}

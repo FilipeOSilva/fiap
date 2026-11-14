@@ -1,0 +1,31 @@
+meta {
+  name: 1.4 Validação de login - sucesso
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/users/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{userEmail}}",
+    "password": "{{userPassword}}"
+  }
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("E-mail do usuário logado", function() {
+    expect(res.getBody().email).to.equal(bru.getVar("userEmail"));
+  });
+}

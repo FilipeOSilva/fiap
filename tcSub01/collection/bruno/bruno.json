@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Room Reservation API - Tech Challenge",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

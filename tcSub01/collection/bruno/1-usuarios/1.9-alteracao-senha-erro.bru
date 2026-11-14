@@ -1,0 +1,31 @@
+meta {
+  name: 1.9 Alteração de senha - senha atual inválida
+  type: http
+  seq: 9
+}
+
+patch {
+  url: {{baseUrl}}/api/users/{{userId}}/password
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "currentPassword": "senhaErrada",
+    "newPassword": "outraSenha123"
+  }
+}
+
+tests {
+  test("Status 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+  test("Mensagem de senha atual inválida", function() {
+    expect(res.getBody().message).to.include("Senha atual");
+  });
+}

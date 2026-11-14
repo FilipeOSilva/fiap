@@ -1,0 +1,20 @@
+meta {
+  name: 2.5 Disponibilidade na faixa
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/rooms/available?start={{startTime}}&end={{endTime}}&minCapacity=5
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Sala está disponível", function() {
+    expect(res.getBody().some((r) => r.id === Number(bru.getVar("roomId")))).to.equal(true);
+  });
+}

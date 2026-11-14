@@ -1,0 +1,31 @@
+meta {
+  name: 1.10 Login com a nova senha
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/api/users/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{userEmail}}",
+    "password": "{{userPassword}}"
+  }
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Login com nova senha", function() {
+    expect(res.getBody().message).to.include("sucesso");
+  });
+}

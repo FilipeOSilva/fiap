@@ -1,0 +1,31 @@
+meta {
+  name: 1.5 Validação de login - senha inválida
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/api/users/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{userEmail}}",
+    "password": "senhaErrada"
+  }
+}
+
+tests {
+  test("Status 401", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+  test("Credenciais inválidas", function() {
+    expect(res.getBody().message).to.include("Credenciais");
+  });
+}

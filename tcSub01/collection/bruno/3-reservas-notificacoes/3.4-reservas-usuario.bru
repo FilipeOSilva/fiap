@@ -1,0 +1,20 @@
+meta {
+  name: 3.4 Reservas do usuário
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/reservations/user/{{userId}}
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Lista não vazia", function() {
+    expect(res.getBody().length).to.be.above(0);
+  });
+}

@@ -1,0 +1,33 @@
+meta {
+  name: 3.2 Conflito de horário na mesma sala
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/reservations
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "userId": {{userId}},
+    "roomId": {{roomId}},
+    "startTime": "{{startTime}}",
+    "endTime": "{{endTime}}"
+  }
+}
+
+tests {
+  test("Status 409", function() {
+    expect(res.getStatus()).to.equal(409);
+  });
+  test("Mensagem de indisponibilidade", function() {
+    expect(res.getBody().message).to.include("indisponível");
+  });
+}

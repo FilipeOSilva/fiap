@@ -1,0 +1,41 @@
+meta {
+  name: 2.2 Cadastro de sala válido
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/rooms
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Sala Azul {{runId}}",
+    "capacity": 12,
+    "location": "3º andar - Ala Norte",
+    "resources": ["PROJETOR", "VIDEOCONFERENCIA"],
+    "status": "ATIVA"
+  }
+}
+
+script:post-response {
+  bru.setVar("roomId", res.getBody().id);
+}
+
+tests {
+  test("Status 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+  test("Sala ativa", function() {
+    expect(res.getBody().status).to.equal("ATIVA");
+  });
+  test("Recursos cadastrados", function() {
+    expect(res.getBody().resources).to.include("PROJETOR");
+  });
+}

@@ -1,0 +1,20 @@
+meta {
+  name: 3.3 Busca de reserva por ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/reservations/{{reservationId}}
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Mesma reserva", function() {
+    expect(res.getBody().id).to.equal(Number(bru.getVar("reservationId")));
+  });
+}

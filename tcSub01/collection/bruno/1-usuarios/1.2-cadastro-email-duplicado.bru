@@ -1,0 +1,33 @@
+meta {
+  name: 1.2 Cadastro inválido - e-mail duplicado
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/users
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Maria Silva",
+    "email": "{{userEmail}}",
+    "password": "{{userPassword}}",
+    "role": "USUARIO"
+  }
+}
+
+tests {
+  test("Status 409", function() {
+    expect(res.getStatus()).to.equal(409);
+  });
+  test("Mensagem de e-mail duplicado", function() {
+    expect(res.getBody().message).to.include("E-mail");
+  });
+}

@@ -1,0 +1,34 @@
+meta {
+  name: 2.6 Atualização de sala
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{baseUrl}}/api/rooms/{{roomId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Sala Azul {{runId}}",
+    "capacity": 20,
+    "location": "3º andar - Ala Norte",
+    "resources": ["PROJETOR", "VIDEOCONFERENCIA", "QUADRO_BRANCO"],
+    "status": "ATIVA"
+  }
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Capacidade atualizada", function() {
+    expect(res.getBody().capacity).to.equal(20);
+  });
+}

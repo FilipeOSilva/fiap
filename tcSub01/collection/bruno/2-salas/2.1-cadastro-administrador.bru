@@ -1,0 +1,37 @@
+meta {
+  name: 2.1 Cadastro de administrador
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/users
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Admin Teste",
+    "email": "{{adminEmail}}",
+    "password": "admin123",
+    "role": "ADMIN"
+  }
+}
+
+script:post-response {
+  bru.setVar("adminId", res.getBody().id);
+}
+
+tests {
+  test("Status 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+  test("Papel ADMIN", function() {
+    expect(res.getBody().role).to.equal("ADMIN");
+  });
+}

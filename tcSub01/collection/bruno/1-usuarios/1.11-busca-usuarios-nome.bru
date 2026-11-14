@@ -1,0 +1,23 @@
+meta {
+  name: 1.11 Busca de usuários pelo nome
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{baseUrl}}/api/users?name=Maria
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Retorna lista", function() {
+    expect(res.getBody()).to.be.an("array");
+  });
+  test("Contém o usuário buscado", function() {
+    expect(res.getBody().some((u) => u.name.includes("Maria"))).to.equal(true);
+  });
+}
