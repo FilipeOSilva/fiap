@@ -1,0 +1,53 @@
+.
+├── java
+│   └── com
+│       └── fsilva
+│           └── tc01
+│               ├── controller
+│               │   ├── AuthenticationController.java
+│               │   └── UserController.java
+│               ├── domain
+│               │   └── user
+│               │       ├── User.java
+│               │       └── UserRole.java
+│               ├── dto
+│               │   ├── AuthenticationDTO.java
+│               │   ├── ChangePasswordDTO.java
+│               │   ├── CreateUserDTO.java
+│               │   ├── LoginResponseDTO.java
+│               │   ├── RegisterDTO.java
+│               │   ├── RequestUserDTO.java
+│               │   ├── UpdateUserDTO.java
+│               │   └── UserResponseDTO.java
+│               ├── infra
+│               │   ├── docs
+│               │   │   └── SwaggerConfiguration.java
+│               │   ├── exceptions
+│               │   │   ├── BusinessException.java
+│               │   │   ├── EmailAlreadyExistsException.java
+│               │   │   ├── GlobalExceptionHandler.java
+│               │   │   └── ResourceNotFoundException.java
+│               │   └── security
+│               │       ├── SecurityConfigurations.java
+│               │       ├── SecurityFilter.java
+│               │       └── TokenService.java
+│               ├── mapper
+│               │   └── UserMapper.java
+│               ├── repository
+│               │   └── UserRepository.java
+│               ├── service
+│               │   ├── AuthorizationService.java
+│               │   ├── impl
+│               │   │   └── UserServiceImpl.java
+│               │   └── UserService.java
+│               └── Tc01Application.java
+├── resources
+│   ├── application.properties
+│   ├── db
+│   │   └── migration
+│   │       └── V1__create-first-tables.sql
+│   ├── static
+│   └── templates
+└── tc.txt
+
+22 directories, 29 files
